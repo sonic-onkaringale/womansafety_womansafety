@@ -11,6 +11,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -42,12 +43,13 @@ public class BluetoothDevicesListActivity extends AppCompatActivity {
         } else {
             searchBluetoothDevice();
         }
-        listView.setOnClickListener(new View.OnClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String subString = macAddress.substring(macAddress.length() -17);
                 Intent intent = new Intent(BluetoothDevicesListActivity.this,ArduinoBluetoothActivity.class);
                 intent.putExtra(EXTRA_ADDRESS, subString);
+                startActivity(intent);
             }
         });
     }
