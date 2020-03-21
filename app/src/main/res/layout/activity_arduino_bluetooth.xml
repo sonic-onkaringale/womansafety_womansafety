@@ -11,7 +11,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:text="If the internet connection is on then the app will locate and call the nearest police station and the people in near radius who have application.
+If the intenet connection is not available on that then it will call the 100 Emergency number and it will send message to their emergency contact with their default message to their location's url link."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

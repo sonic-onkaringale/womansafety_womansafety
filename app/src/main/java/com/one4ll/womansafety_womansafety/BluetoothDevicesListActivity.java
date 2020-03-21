@@ -13,7 +13,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -28,13 +30,14 @@ public class BluetoothDevicesListActivity extends AppCompatActivity {
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> arrayList;
     private String macAddress;
-
+    private TextView noBluetoothFound;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth_devices_list);
         listView = findViewById(R.id.list_view);
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        noBluetoothFound = findViewById(R.id.no_bluetooth_device_found);
         arrayList = new ArrayList<>();
         if (bluetoothAdapter == null) {
             Log.d(TAG, "onCreate: bluetooth is not activate");
@@ -69,6 +72,8 @@ public class BluetoothDevicesListActivity extends AppCompatActivity {
             listView.setAdapter(arrayAdapter);
 
         }else{
+            noBluetoothFound.setVisibility(View.VISIBLE);
+            listView.setVisibility(View.GONE);
             Toast.makeText(this, "Please Pair with Arduino", Toast.LENGTH_LONG).show();
         }
 
