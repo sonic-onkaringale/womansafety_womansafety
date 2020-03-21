@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         number = findViewById(R.id.number);
         message = findViewById(R.id.message);
-        submit = findViewById(R.id.submit);
+        submit = findViewById(R.id.set_up_bluetooth);
         relativeLayout = findViewById(R.id.relative_layout);
         relativeLayout.setVisibility(View.INVISIBLE);
 
