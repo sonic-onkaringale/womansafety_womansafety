@@ -25,6 +25,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -39,6 +41,7 @@ public class ArduinoBluetoothActivity extends AppCompatActivity {
     private String macAddress;
     private BluetoothAdapter bluetoothAdapter;
     private BluetoothSocket bluetoothSocket;
+    private Button setUpBluetooth:
     //spp UUID
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
     private ProgressDialog progressDialog;
@@ -48,6 +51,7 @@ public class ArduinoBluetoothActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arduino_bluetooth);
         progressDialog = new ProgressDialog(this);
+        setUpBluetooth = findViewById(R.id.set_up_bluetooth);
         Intent intent = getIntent();
         macAddress = intent.getStringExtra(BluetoothDevicesListActivity.EXTRA_ADDRESS);
         Log.d(TAG, "onCreate: mac address " + macAddress);
@@ -55,23 +59,29 @@ public class ArduinoBluetoothActivity extends AppCompatActivity {
 
 
         new ConnectBluetooth().execute();
-        try {
-            //send message
-            if (bluetoothSocket != null) {
-                int number = bluetoothSocket.getInputStream().read();
-                if (number == 1) {
-                    //TODO SEND MESSAGE TO EMERGENCY CONTACT
-                    sendAlertMessageToUser();
+        setUpBluetooth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    //send message
+                    if (bluetoothSocket != null) {
+                        int number = bluetoothSocket.getInputStream().read();
+                        if (number == 1) {
+                            //TODO SEND MESSAGE TO EMERGENCY CONTACT
+                            sendAlertMessageToUser();
+                        }
+
+
+                    } else {
+                        // WAIT FOR THE 1 😁
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-
-
-            } else {
-                // WAIT FOR THE 1 😁
             }
+        });
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private void sendAlertMessageToUser() {
@@ -124,14 +134,19 @@ public class ArduinoBluetoothActivity extends AppCompatActivity {
                 String number = sharedPreferences.getString("number","0");
                 Log.d(TAG, "onClick: "+number);
                 String usersMessage = sharedPreferences.getString("message","0");
-                String message = usersMessage + latitude  + latitude + "longitude" + longitude + "address line" + street + "pin code" + pincode + "locality" + locality;
+                String message = usersMessage +"latitude"  + latitude + "longitude" + longitude + "address line" + street + "pin code" + pincode + "locality" + locality;
                 sendMessage(message,number);
             } catch (IOException e) {
                 e.printStackTrace();
                 if (e.getMessage().equals("grpc failed")){
                     Log.d(TAG, "onLocationChanged: unable to find location");
-                    String message = "Help me! latitude" + latitude +"longitude "+ longitude;
-                    sendMessage(message, );
+                    SharedPreferences sharedPreferences = getSharedPreferences("storage",MODE_PRIVATE);
+                    String number = sharedPreferences.getString("number","0");
+                    Log.d(TAG, "onClick: "+number);
+                    String userMessage = sharedPreferences.getString("message","0");
+                    String message = userMessage + "latitude" + latitude +"longitude "+ longitude;
+
+                    sendMessage(message,number );
                 }
             }
 
