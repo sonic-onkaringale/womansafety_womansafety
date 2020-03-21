@@ -88,7 +88,7 @@ void serialOutputWhenBeatHappens()
      sendDataToSerial('Q',IBI);   
    }   
 
- if (BPM>160)
+ if (BPM>=160)
    {
      pinMode(BT_SERIAL_TX, HIGH); 
     }
