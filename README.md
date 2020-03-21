@@ -1,4 +1,5 @@
 # womansafety_womansafety
+Safety of Women in India has become a major issue in India now. The crime rates against women in the country have only risen to a great extent. Women think twice before stepping out of their homes, especially at the night. This is, unfortunately, the sad reality of our country that lives in constant fear.
 An android application to report incidents of sexual abuse/ violence in real time as well as post - incident and analysing these information to prevent future incidents like this . Another important aspect of the app is to create awareness among people regarding this issues .
 PANIC BUTTON:
 Here we use IoT based device to detect pulse rate with help of band. If pulse sensor detect the pulse over normal rate theen it will send signal through bluetooth to the app and it will display a notification with long vibration and manually has to be deactivated otherwise it send the messages to trusted persons in the mean time.                                                                        
