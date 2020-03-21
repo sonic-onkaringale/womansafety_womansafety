@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backgroundforall"
     tools:context=".MainActivity">
 
     <TextView
@@ -12,6 +13,7 @@
         android:text="Women Safety App \n (Enter Your Details Below)"
         android:textColor="#000000"
         android:textSize="24dp"
+        android:textStyle="bold"
         android:gravity="center"
         android:id="@+id/header"
         android:layout_marginTop="50dp"/>
@@ -40,9 +42,10 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="100dp"
         android:text="Submit"
+        android:textStyle="bold"
         android:id="@+id/submit"
-        android:textColor="#000000"
-        android:background="#FFA500"/>
+        android:textColor="#FFFFFF"
+        android:background="#000000"/>
 
 
 </RelativeLayout>
