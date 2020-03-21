@@ -41,7 +41,7 @@ public class ArduinoBluetoothActivity extends AppCompatActivity {
     private String macAddress;
     private BluetoothAdapter bluetoothAdapter;
     private BluetoothSocket bluetoothSocket;
-    private Button setUpBluetooth:
+    private Button setUpBluetooth;
     //spp UUID
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
     private ProgressDialog progressDialog;
@@ -55,13 +55,14 @@ public class ArduinoBluetoothActivity extends AppCompatActivity {
         Intent intent = getIntent();
         macAddress = intent.getStringExtra(BluetoothDevicesListActivity.EXTRA_ADDRESS);
         Log.d(TAG, "onCreate: mac address " + macAddress);
-        sendAlertMessageToUser();
+//        sendAlertMessageToUser();
 
 
-        new ConnectBluetooth().execute();
+
         setUpBluetooth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new ConnectBluetooth().execute();
                 try {
                     //send message
                     if (bluetoothSocket != null) {
@@ -145,7 +146,6 @@ public class ArduinoBluetoothActivity extends AppCompatActivity {
                     Log.d(TAG, "onClick: "+number);
                     String userMessage = sharedPreferences.getString("message","0");
                     String message = userMessage + "latitude" + latitude +"longitude "+ longitude;
-
                     sendMessage(message,number );
                 }
             }
@@ -259,8 +259,10 @@ private class ConnectBluetooth extends AsyncTask<Void, Void, Void> {
         if (resultCode == RESULT_OK) {
             if (requestCode == LOCATION_REQUEST_CODE) {
                 Log.d(TAG, "onActivityResult: permission given");
+                accessLocation();
             } else if (requestCode == MESSAGE_REQUEST_CODE){
-//                sendMessage("h", "8249766641");
+                //I know it's wrong but we don't have time right?
+                accessLocation();
             }
         }
     }
