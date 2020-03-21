@@ -41,9 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
-
-
-
         }
 
         final SharedPreferences sharedPreferences = getSharedPreferences("storage",MODE_PRIVATE);
@@ -51,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (checkForValid()){
-                    sharedPreferences.edit().putString("number",number.getText().toString()).commit();
-                    sharedPreferences.edit().putString("message",message.getText().toString()).commit();
+                    sharedPreferences.edit().putString("number",number.getText().toString()).apply();
+                    sharedPreferences.edit().putString("message",message.getText().toString()).apply();
                     Intent intent = new Intent(MainActivity.this,RescueScreen.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
