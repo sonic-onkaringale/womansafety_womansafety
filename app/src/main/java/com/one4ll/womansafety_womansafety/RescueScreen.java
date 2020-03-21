@@ -35,12 +35,12 @@ public class RescueScreen extends AppCompatActivity {
         rescue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SmsManager smsManager = SmsManager.getDefault();
                 SharedPreferences sharedPreferences = getSharedPreferences("storage",MODE_PRIVATE);
                 String number = sharedPreferences.getString("number","0");
                 Log.d(TAG, "onClick: "+number);
                 String message = sharedPreferences.getString("message","0");
-                smsManager.sendTextMessage(number,null,message,null,null);
+                //Sends message to Emergency contact
+                MessageUtil.sendEmergencyMessage(message, number);
 
             }
         });
