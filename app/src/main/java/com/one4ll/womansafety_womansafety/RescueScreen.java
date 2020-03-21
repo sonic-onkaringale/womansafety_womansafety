@@ -40,7 +40,7 @@ public class RescueScreen extends AppCompatActivity {
                 Log.d(TAG, "onClick: "+number);
                 String message = sharedPreferences.getString("message","0");
                 //Sends message to Emergency contact
-                MessageUtil.sendEmergencyMessage(message, number);
+//                MessageUtil.sendEmergencyMessage(message, number);
 
             }
         });
