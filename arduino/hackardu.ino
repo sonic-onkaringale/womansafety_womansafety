@@ -44,13 +44,11 @@ void loop()
    
   if (QS == true) 
     {     
-      
-      
       serialOutputWhenBeatHappens();      
       QS = false;     
     }
      
-  delay(20); 
+  delay(30); 
 }
 
 
@@ -94,6 +92,9 @@ void serialOutputWhenBeatHappens()
    {
      pinMode(BT_SERIAL_TX, HIGH); 
     }
+ else
+ {
+        pinMode(BT_SERIAL_TX,LOW);
 }
 
 void arduinoSerialMonitorVisual(char symbol, int data )
