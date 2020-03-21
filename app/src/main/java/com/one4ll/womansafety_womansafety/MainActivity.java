@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity {
     private EditText number;
     private EditText message;
     private Button submit;
+    private RelativeLayout relativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +24,12 @@ public class MainActivity extends AppCompatActivity {
         number = findViewById(R.id.number);
         message = findViewById(R.id.message);
         submit = findViewById(R.id.submit);
+        relativeLayout = findViewById(R.id.relative_layout);
+        relativeLayout.setVisibility(View.INVISIBLE);
 
         SharedPreferences firstTimeActivity = getSharedPreferences("isFirstTime",MODE_PRIVATE);
         if (getIntent().getStringExtra("number") != null){
+            relativeLayout.setVisibility(View.VISIBLE);
             String intentNumber = getIntent().getStringExtra("number");
             String intentMessag = getIntent().getStringExtra("message");
             number.setText(intentNumber);
@@ -42,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
+        relativeLayout.setVisibility(View.VISIBLE);
 
         final SharedPreferences sharedPreferences = getSharedPreferences("storage",MODE_PRIVATE);
         submit.setOnClickListener(new View.OnClickListener() {
