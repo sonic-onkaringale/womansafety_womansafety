@@ -16,6 +16,7 @@ public class RescueScreen extends AppCompatActivity {
 
     private Button rescue;
     private Button edit_button;
+    private Button contact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,13 @@ public class RescueScreen extends AppCompatActivity {
 
         rescue = findViewById(R.id.rescue);
         edit_button = findViewById(R.id.edit_button);
+        contact = findViewById(R.id.contact);
+        contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openContact();
+            }
+        });
         rescue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,5 +53,9 @@ public class RescueScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    public void openContact(){
+        Intent openContact = new Intent(RescueScreen.this, Contact.class);
+        startActivity(openContact);
     }
 }

@@ -1,9 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backgroundforall"
     tools:context=".Contact">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Contact if you have Query"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:id="@+id/header"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:textColor="#000000"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="surajkeshr571@gmail.com"
+        android:layout_marginLeft="70dp"
+        android:id="@+id/header1"
+        android:layout_below="@id/header"
+        android:layout_marginTop="30dp"
+        android:textSize="24dp"
+        android:textColor="#000000"/>
+    <view
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:layout_below="@id/header1"
+        android:layout_marginTop="20dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="( User Guide )"
+        android:layout_below="@id/header1"
+        android:id="@+id/header3"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="70dp"
+        android:textSize="24dp"
+        android:textColor="#000000"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Firstly give your parent phone number \n Then message of yours that will send to your guardian number \n After that you will comes in rescue screen on that just click on rescue circular button \n After clicking on that button message will send automatically on the given number \n if you want to edit details then edit button are there go through that and edit your details if you want."
+        android:layout_marginLeft="70dp"
+        android:id="@+id/header4"
+        android:layout_below="@id/header3"
+        android:layout_marginTop="30dp"
+        android:textSize="24dp"
+        android:textColor="#000000"/>
+
+    </RelativeLayout>
+
+
+
+</ScrollView>
