@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -13,6 +14,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -23,12 +25,15 @@ public class ArduinoBluetoothActivity extends AppCompatActivity {
     private String macAddress;
     private BluetoothAdapter bluetoothAdapter;
     private BluetoothSocket bluetoothSocket;
+    //spp UUID
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arduino_bluetooth);
+        progressDialog = new ProgressDialog(this);
         Intent intent = getIntent();
         macAddress = intent.getStringExtra(BluetoothDevicesListActivity.EXTRA_ADDRESS);
         Log.d(TAG, "onCreate: mac address " + macAddress);
@@ -78,7 +83,9 @@ public class ArduinoBluetoothActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-
+            progressDialog.setMessage("Connect to the Arduino");
+            progressDialog.setTitle("Please wait");
+            progressDialog.show();
         }
 
         @Override
@@ -100,12 +107,31 @@ public class ArduinoBluetoothActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            progressDialog.dismiss();
             if (!connectionSuccess) {
-                Log.d(TAG, "onPostExecute: failed to connect");
+                AlertDialog.Builder builder = new AlertDialog.Builder(getBaseContext());
+                builder.setTitle("Failed");
+                builder.setMessage("Connection failed. Is it a SPP Bluetooth? Try again.");
+                builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        new ConnectBluetooth().execute();
+                    }
+                }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).show();
             } else {
                 Log.d(TAG, "onPostExecute: success");
             }
-
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        super.onDestroy();
     }
 }
