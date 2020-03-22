@@ -50,7 +50,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Firstly give your parent phone number \n Then message of yours that will send to your guardian number \n After that you will comes in rescue screen on that just click on rescue circular button \n After clicking on that button message will send automatically on the given number \n if you want to edit details then edit button are there go through that and edit your details if you want."
+        android:text="Firstly give your parent phone number \n Then message of yours that will send to your guardian number \n After that you will comes in rescue screen on that just click on rescue circular button \n After clicking on that button message will send automatically on the given number \n if you want to edit details then edit button are there go through that and edit your details if you want and in upper right side there is 3 dots on clicking of them the arduino setting up option comes from there you can set your adruino connectivity"
         android:layout_marginLeft="70dp"
         android:id="@+id/header4"
         android:layout_below="@id/header3"
