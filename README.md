@@ -13,3 +13,5 @@ Color: The color of dot on the map represents type of incident occurred like the
 REPORT BUTTON:
 Theis feature allows user to submit a detailed report of incident like time, place after the incident has happened.
 So that a proper action can be taken by the respective authority.
+
+video link:-https://click.email.vimeo.com/?qs=88d2c51cd4b9a90c3f38179c7543b77739c6d0806ed3bc7092377fe50a061ded35b130f32cb1a865942308d530d88d77d046890732061646148d54c089a36d46
