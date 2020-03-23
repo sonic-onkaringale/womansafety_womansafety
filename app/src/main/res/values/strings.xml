@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Woman Safety</string>
     <string name="title_activity_maps">Map</string>
+    <string name="about_arduino">If the internet connection is on then the app will locate and call the nearest police station and the people in near radius who have application. If the intenet connection is not available on that then it will call the 100 Emergency number and it will send message to their emergency contact with their default message to their location\'s url link.</string>
+    <string name="set_up_bluetooth_and_arduino">Set Up Bluetooth and Arduino</string>
+    <string name="women_safety_app_n_enter_your_details_below">Women Safety App \n (Enter Your Details Below)</string>
+    <string name="enter_your_guardian_number">Enter your guardian number</string>
+    <string name="enter_your_message">Enter your message</string>
+    <string name="submit">Submit</string>
+    <string name="contact_if_you_have_query">Contact if you have Query</string>
+    <string name="no_bluetooth_device_paired_with_device_please_paired_with_arduino">No Bluetooth Device paired with Device Please Paired with Arduino!</string>
+    <string name="rescue">Rescue</string>
+    <string name="edit_your_details">Edit Your Details</string>
+    <string name="contact">Contact</string>
 </resources>

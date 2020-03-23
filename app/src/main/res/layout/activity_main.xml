@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:gravity="center"
-        android:text="Women Safety App \n (Enter Your Details Below)"
+        android:text="@string/women_safety_app_n_enter_your_details_below"
         android:textColor="#000000"
         android:textSize="24dp"
         android:textStyle="bold" />
@@ -28,7 +28,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginRight="8dp"
         android:ems="10"
-        android:hint="Enter your guardian number"
+        android:hint="@string/enter_your_guardian_number"
         android:inputType="phone"
         android:paddingLeft="4dp"
         android:paddingRight="16dp" />
@@ -41,7 +41,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="8dp"
-        android:hint="Enter your message"
+        android:hint="@string/enter_your_message"
         android:paddingLeft="4dp"
         android:paddingRight="16dp" />
 
@@ -53,7 +53,7 @@
         android:layout_marginLeft="100dp"
         android:layout_marginTop="30dp"
         android:background="#000000"
-        android:text="Submit"
+        android:text="@string/submit"
         android:textColor="#FFFFFF"
         android:textStyle="bold" />
 

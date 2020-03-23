@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:gravity="center"
-            android:text="Contact if you have Query"
+            android:text="@string/contact_if_you_have_query"
             android:textColor="#000000"
             android:textSize="24dp"
             android:textStyle="bold" />
@@ -25,7 +25,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="surajkeshr571@gmail.com"
+        android:text="gouripanda4@gmail.com \nsurajkeshr571@gmail.com\nviswajitkumar@gmail.com\ndeepaksahu@gmail.com"
         android:layout_marginLeft="70dp"
         android:id="@+id/header1"
         android:layout_below="@id/header"

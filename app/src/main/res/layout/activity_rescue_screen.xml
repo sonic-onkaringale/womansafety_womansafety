@@ -15,7 +15,7 @@
         android:layout_marginTop="50dp"
         android:background="@drawable/rescuebackground"
         android:gravity="center"
-        android:text="Rescue"
+        android:text="@string/rescue"
         android:textSize="24dp"
         android:textStyle="bold" />
 
@@ -32,7 +32,7 @@
         android:layout_marginEnd="31dp"
         android:background="#000000"
         android:gravity="center"
-        android:text="Edit Your Details"
+        android:text="@string/edit_your_details"
         android:textAllCaps="false"
         android:textColor="#FFFFFF" />
 
@@ -48,7 +48,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="0dp"
         android:background="#000000"
-        android:text="Contact"
+        android:text="@string/contact"
         android:textAllCaps="false"
         android:textColor="#FFFF" />
 
