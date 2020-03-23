@@ -31,6 +31,7 @@ public class BluetoothDevicesListActivity extends AppCompatActivity {
     private ArrayList<String> arrayList;
     private String macAddress;
     private TextView noBluetoothFound;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,15 +43,15 @@ public class BluetoothDevicesListActivity extends AppCompatActivity {
         if (bluetoothAdapter == null) {
             Log.d(TAG, "onCreate: bluetooth is not activate");
             Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(intent,1);
+            startActivityForResult(intent, 1);
         } else {
             searchBluetoothDevice();
         }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String subString = macAddress.substring(macAddress.length() -17);
-                Intent intent = new Intent(BluetoothDevicesListActivity.this,ArduinoBluetoothActivity.class);
+                String subString = macAddress.substring(macAddress.length() - 17);
+                Intent intent = new Intent(BluetoothDevicesListActivity.this, ArduinoBluetoothActivity.class);
                 intent.putExtra(EXTRA_ADDRESS, subString);
                 startActivity(intent);
             }
@@ -61,31 +62,32 @@ public class BluetoothDevicesListActivity extends AppCompatActivity {
         pairedDevices = bluetoothAdapter.getBondedDevices();
 //        IntentFilter intentFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
 //        registerReceiver(broadcastReceiver, intentFilter);
-        if (pairedDevices.size() > 0){
-            for (BluetoothDevice bluetoothDevice : pairedDevices){
+        if (pairedDevices.size() > 0) {
+            for (BluetoothDevice bluetoothDevice : pairedDevices) {
 
-                arrayList.add("Name "+ bluetoothDevice.getName()+"\nMAC address " +bluetoothDevice.getAddress());
+                arrayList.add("Name " + bluetoothDevice.getName() + "\nMAC address " + bluetoothDevice.getAddress());
                 macAddress = bluetoothDevice.getAddress();
 
             }
-            arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,arrayList);
+            arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList);
             listView.setAdapter(arrayAdapter);
 
-        }else{
+        } else {
             noBluetoothFound.setVisibility(View.VISIBLE);
             listView.setVisibility(View.GONE);
             Toast.makeText(this, "Please Pair with Arduino", Toast.LENGTH_LONG).show();
         }
 
     }
+
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             Log.d(TAG, "onReceive: ");
-            if (BluetoothDevice.ACTION_FOUND.equals(action)){
+            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice bluetoothDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                Log.d(TAG, "onReceive: bluetooth device name "+bluetoothDevice.getName());
+                Log.d(TAG, "onReceive: bluetooth device name " + bluetoothDevice.getName());
                 Log.d(TAG, "onReceive: bluetooth device address " + bluetoothDevice.getAddress());
             }
         }

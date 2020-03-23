@@ -58,7 +58,6 @@ public class ArduinoBluetoothActivity extends AppCompatActivity {
 //        sendAlertMessageToUser();
 
 
-
         setUpBluetooth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,30 +122,30 @@ public class ArduinoBluetoothActivity extends AppCompatActivity {
                 String street = null;
                 String pincode = null;
                 String locality = null;
-                for (Address address : addressList){
-                     street = address.getAddressLine(0);
-                     pincode = address.getPostalCode();
-                     locality = address.getLocality();
-                    Log.d(TAG, "onLocationChanged: street "+ street);
-                    Log.d(TAG, "onLocationChanged: "+ pincode);
-                    Log.d(TAG, "onLocationChanged: loca"+ locality);
+                for (Address address : addressList) {
+                    street = address.getAddressLine(0);
+                    pincode = address.getPostalCode();
+                    locality = address.getLocality();
+                    Log.d(TAG, "onLocationChanged: street " + street);
+                    Log.d(TAG, "onLocationChanged: " + pincode);
+                    Log.d(TAG, "onLocationChanged: loca" + locality);
                 }
-                SharedPreferences sharedPreferences = getSharedPreferences("storage",MODE_PRIVATE);
-                String number = sharedPreferences.getString("number","0");
-                Log.d(TAG, "onClick: "+number);
-                String usersMessage = sharedPreferences.getString("message","0");
-                String message = usersMessage +"latitude"  + latitude + "longitude" + longitude + "address line" + street + "pin code" + pincode + "locality" + locality;
-                sendMessage(message,number);
+                SharedPreferences sharedPreferences = getSharedPreferences("storage", MODE_PRIVATE);
+                String number = sharedPreferences.getString("number", "0");
+                Log.d(TAG, "onClick: " + number);
+                String usersMessage = sharedPreferences.getString("message", "0");
+                String message = usersMessage + "latitude" + latitude + "longitude" + longitude + "address line" + street + "pin code" + pincode + "locality" + locality;
+                sendMessage(message, number);
             } catch (IOException e) {
                 e.printStackTrace();
-                if (e.getMessage().equals("grpc failed")){
+                if (e.getMessage().equals("grpc failed")) {
                     Log.d(TAG, "onLocationChanged: unable to find location");
-                    SharedPreferences sharedPreferences = getSharedPreferences("storage",MODE_PRIVATE);
-                    String number = sharedPreferences.getString("number","0");
-                    Log.d(TAG, "onClick: "+number);
-                    String userMessage = sharedPreferences.getString("message","0");
-                    String message = userMessage + "latitude" + latitude +"longitude "+ longitude;
-                    sendMessage(message,number );
+                    SharedPreferences sharedPreferences = getSharedPreferences("storage", MODE_PRIVATE);
+                    String number = sharedPreferences.getString("number", "0");
+                    Log.d(TAG, "onClick: " + number);
+                    String userMessage = sharedPreferences.getString("message", "0");
+                    String message = userMessage + "latitude" + latitude + "longitude " + longitude;
+                    sendMessage(message, number);
                 }
             }
 
@@ -167,6 +166,7 @@ public class ArduinoBluetoothActivity extends AppCompatActivity {
             Log.d(TAG, "onProviderDisabled: " + provider);
         }
     };
+
     private void sendMessage(String message, String phoneNumber) {
         SmsManager smsManager = SmsManager.getDefault();
         if (Build.VERSION.SDK_INT >= 22) {
@@ -185,7 +185,7 @@ public class ArduinoBluetoothActivity extends AppCompatActivity {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (Build.VERSION.SDK_INT >= 22) {
             if (ContextCompat.checkSelfPermission(ArduinoBluetoothActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(ArduinoBluetoothActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_REQUEST_CODE);
+                ActivityCompat.requestPermissions(ArduinoBluetoothActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_REQUEST_CODE);
             } else {
                 locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, locationListener, null);
             }
@@ -194,59 +194,59 @@ public class ArduinoBluetoothActivity extends AppCompatActivity {
         }
 
 
-}
-
-private class ConnectBluetooth extends AsyncTask<Void, Void, Void> {
-    private boolean connectionSuccess = true;
-
-    @Override
-    protected void onPreExecute() {
-        progressDialog.setMessage("Connect to the Arduino");
-        progressDialog.setTitle("Please wait");
-        progressDialog.show();
     }
 
-    @Override
-    protected Void doInBackground(Void... voids) {
-        try {
-            bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-            BluetoothDevice bluetoothDevice = bluetoothAdapter.getRemoteDevice(macAddress);
-            bluetoothSocket = bluetoothDevice.createInsecureRfcommSocketToServiceRecord(MY_UUID);
-            bluetoothSocket.connect();
+    private class ConnectBluetooth extends AsyncTask<Void, Void, Void> {
+        private boolean connectionSuccess = true;
 
-        } catch (IOException e) {
-            connectionSuccess = false;
-            e.printStackTrace();
+        @Override
+        protected void onPreExecute() {
+            progressDialog.setMessage("Connect to the Arduino");
+            progressDialog.setTitle("Please wait");
+            progressDialog.show();
         }
-        return null;
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                BluetoothDevice bluetoothDevice = bluetoothAdapter.getRemoteDevice(macAddress);
+                bluetoothSocket = bluetoothDevice.createInsecureRfcommSocketToServiceRecord(MY_UUID);
+                bluetoothSocket.connect();
+
+            } catch (IOException e) {
+                connectionSuccess = false;
+                e.printStackTrace();
+            }
+            return null;
 
 
-    }
-
-    @Override
-    protected void onPostExecute(Void aVoid) {
-        progressDialog.dismiss();
-        if (!connectionSuccess) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(ArduinoBluetoothActivity.this);
-            builder.setTitle("Failed");
-            builder.setMessage("Connection failed. Is it a SPP Bluetooth? Try again.");
-            builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    new ConnectBluetooth().execute();
-                }
-            }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                }
-            }).show();
-        } else {
-            Log.d(TAG, "onPostExecute: success");
         }
-    }
 
-}
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            progressDialog.dismiss();
+            if (!connectionSuccess) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ArduinoBluetoothActivity.this);
+                builder.setTitle("Failed");
+                builder.setMessage("Connection failed. Is it a SPP Bluetooth? Try again.");
+                builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        new ConnectBluetooth().execute();
+                    }
+                }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).show();
+            } else {
+                Log.d(TAG, "onPostExecute: success");
+            }
+        }
+
+    }
 
     @Override
     protected void onDestroy() {
@@ -260,7 +260,7 @@ private class ConnectBluetooth extends AsyncTask<Void, Void, Void> {
             if (requestCode == LOCATION_REQUEST_CODE) {
                 Log.d(TAG, "onActivityResult: permission given");
                 accessLocation();
-            } else if (requestCode == MESSAGE_REQUEST_CODE){
+            } else if (requestCode == MESSAGE_REQUEST_CODE) {
                 //I know it's wrong but we don't have time right?
                 accessLocation();
             }

@@ -39,10 +39,10 @@ public class RescueScreen extends AppCompatActivity {
         rescue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sharedPreferences = getSharedPreferences("storage",MODE_PRIVATE);
-                String number = sharedPreferences.getString("number","0");
-                Log.d(TAG, "onClick: "+number);
-                String message = sharedPreferences.getString("message","0");
+                SharedPreferences sharedPreferences = getSharedPreferences("storage", MODE_PRIVATE);
+                String number = sharedPreferences.getString("number", "0");
+                Log.d(TAG, "onClick: " + number);
+                String message = sharedPreferences.getString("message", "0");
                 //Sends message to Emergency contact
 //                MessageUtil.sendEmergencyMessage(message, number);
 
@@ -51,14 +51,15 @@ public class RescueScreen extends AppCompatActivity {
         edit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RescueScreen.this,MainActivity.class);
-                intent.putExtra("number",getSharedPreferences("storage",MODE_PRIVATE).getString("number","0"));
-                intent.putExtra("message",getSharedPreferences("storage",MODE_PRIVATE).getString("message","0"));
+                Intent intent = new Intent(RescueScreen.this, MainActivity.class);
+                intent.putExtra("number", getSharedPreferences("storage", MODE_PRIVATE).getString("number", "0"));
+                intent.putExtra("message", getSharedPreferences("storage", MODE_PRIVATE).getString("message", "0"));
                 startActivity(intent);
             }
         });
     }
-    public void openContact(){
+
+    public void openContact() {
         Intent openContact = new Intent(RescueScreen.this, Contact.class);
         startActivity(openContact);
     }
@@ -73,8 +74,8 @@ public class RescueScreen extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.set_up_bluetooth_menu){
-            Intent intent = new Intent(RescueScreen.this,BluetoothDevicesListActivity.class);
+        if (id == R.id.set_up_bluetooth_menu) {
+            Intent intent = new Intent(RescueScreen.this, BluetoothDevicesListActivity.class);
             startActivity(intent);
             return true;
         }

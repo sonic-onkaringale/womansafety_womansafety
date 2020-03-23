@@ -14,7 +14,7 @@ public class MessageUtil {
         SmsManager smsManager = SmsManager.getDefault();
         if (Build.VERSION.SDK_INT >= 22) {
             if (ContextCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-                //TODO
+                // TODO: 23/03/20 add permission in util class 
             } else {
                 smsManager.sendTextMessage(phoneNumber, null, message, null, null);
 

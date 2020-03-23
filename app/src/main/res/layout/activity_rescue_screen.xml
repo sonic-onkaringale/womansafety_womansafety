@@ -50,6 +50,6 @@
         android:background="#000000"
         android:text="Contact"
         android:textAllCaps="false"
-        android:textColor="#FFFF"/>
+        android:textColor="#FFFF" />
 
 </RelativeLayout>
